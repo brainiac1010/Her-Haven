@@ -28,7 +28,7 @@ const ProductCards = ({ products }) => {
                         <div className='product__card__content'>
                             <h4>{product.name}</h4>
                             <p>${product.price} {product.oldPrice ? <s>${product?.oldPrice}</s> : null}</p>
-                        <RatingStar></RatingStar>
+                        <RatingStar rating={product.rating}></RatingStar>
                         </div>
                     </div>
                 ))
