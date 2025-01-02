@@ -1,5 +1,6 @@
 
 
+import Blogs from '../blogs/Blogs'
 import TrendingProducts from '../Shop/TrendingProducts'
 import Banner from './Banner'
 import Categories from './Categories'
@@ -16,6 +17,7 @@ const Home = () => {
  <TrendingProducts></TrendingProducts>
  <DealsSection></DealsSection>
  <PromoBanner></PromoBanner>
+ <Blogs></Blogs>
 
  </>
   )
