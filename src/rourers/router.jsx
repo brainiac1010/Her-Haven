@@ -5,11 +5,16 @@ import Home from "../components/pages/home/Home";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App></App>, 
-        children : [
+        element: <App></App>,
+        children: [
+
             {
-                path : "/",
+                path: "/",
                 element: <Home></Home>
+            },
+            {
+                path: "/categories/:categoryName",
+                element: <div>Category Page</div>
             },
         ]
     },
