@@ -11,7 +11,7 @@ const CategoryPage = () => {
 
     const [filteredProducts, setfilteredProducts] = useState([]);
     useEffect(() => {
-        const filtered = products.filter((product) => product.category === categoryName.toLocaleLowerCase())
+        const filtered = products.filter((product) => product.category === categoryName.toLowerCase())
         setfilteredProducts(filtered)
     }, [categoryName])
 

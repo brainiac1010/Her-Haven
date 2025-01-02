@@ -5,10 +5,10 @@ import instImg3 from '../assets/instagram-3.jpg'
 import instImg4 from '../assets/instagram-4.jpg'
 import instImg5 from '../assets/instagram-5.jpg'
 import instImg6 from '../assets/instagram-6.jpg'
-const Footer = () => {
+const  Footer = () => {
     return (
         <>
-            <footer className="section__containe footer__container">
+            <footer className="section__container footer__container">
                 <div className="footer__col">
                     <h4>CONTACT INFO</h4>
                     <p>
