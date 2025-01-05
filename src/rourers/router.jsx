@@ -4,6 +4,7 @@ import Home from "../components/pages/home/Home";
 import CategoryPage from "../components/pages/Category/CategoryPage";
 import Search from "../components/pages/search/Search";
 import ShopPage from "../components/pages/Shop/ShopPage";
+import SingelProduct from "../components/pages/Shop/ProductDetails/SingleProduct";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "/shop",
                 element: <ShopPage></ShopPage>
+            },
+            {
+                path: "/shop/:id",
+                element: <SingelProduct></SingelProduct>
             },
 
         ]

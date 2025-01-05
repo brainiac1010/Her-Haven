@@ -27,7 +27,7 @@ useEffect(()=>{
 
             {/* products card */}
 
-            <div className='aection__container'>
+            <div className='section__container'>
                 <ProductCards products={filteredProducts}></ProductCards>
             </div>
         </>
