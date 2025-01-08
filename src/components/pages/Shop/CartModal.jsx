@@ -60,10 +60,10 @@ const CartModal = ({ products = [], isOpen, onClose }) => {
                             products.map((item) => (
                                 <div
                                     key={item.id} // Use item.id instead of index
-                                    className="flex flex-col md:flex-row items-start md:items-center justify-between 
+                                    className="flex flex-col xl:flex-row items-start md:items-center justify-between 
                                     shadow-md p-4 mb-4 border rounded-lg bg-gray-50 hover:shadow-lg transition"
                                 >
-                                    <div className="flex items-center w-full">
+                                    <div className="flex lg:pb-3 items-center w-full">
                                         <span className="mr-4 px-2 py-1 bg-primary text-white rounded-full text-sm font-bold">
                                             {products.indexOf(item) + 1}
                                         </span>
