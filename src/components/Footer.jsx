@@ -46,6 +46,7 @@ const  Footer = () => {
                     <a href="/">Dresses</a>
                 </div>
 
+
                 <div className="footer__col">
                     <h4>INSTAGRAM</h4>
                     <div className="instagram__grid">
