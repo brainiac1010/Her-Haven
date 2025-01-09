@@ -13,4 +13,5 @@ const RatingStar = ({rating}) => {
   )
 }
 
+
 export default RatingStar
