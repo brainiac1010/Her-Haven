@@ -20,6 +20,7 @@ const Register = () => {
     }
 
 
+    
     return (
         <section className='h-screen flex items-center justify-center'>
 
