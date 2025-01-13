@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
-import { useLoginUserMutation } from '../redux/features/auth/authApi';
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLoginUserMutation } from '../redux/features/auth/authApi'
 
 const Login = () => {
 
-    const [message, setMassage] = useState('');
+    const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-const dispatach = useDispatch();
-const [loginUser,{isLoading:loginLoding}] = useLoginUserMutation()
-console.log(loginUser)
+    const dispatch = useDispatch();
+    const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation()
+    // console.log(loginUser)
+    const navigate = useNavigate()
 
-//handel login
+    //handel login
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -21,21 +22,32 @@ console.log(loginUser)
             email,
             password
         }
-        console.log(data)
+        // console.log(data)
+
+        try {
+            const response = await loginUser(data).unwrap();
+
+            // console.log(response)  
+
+            alert("login successfull");
+            navigate("/")
+        } catch (error) {
+            setMessage("Please provide valid email and password")
+        }
     }
 
-    
+
     return (
         <section className='h-screen flex items-center justify-center'>
 
-            <div className='max-w-sm border shadow bf-white mx-auto p-8'>
+            <div className='max-w-sm border shadow bg-white mx-auto p-8'>
                 <h2 className='text-2xl font-semibold pt-5'>Please login</h2>
                 <form onSubmit={handleLogin} className='space-y-5 max-w-sm mx-auto pt-8' action="">
 
-                    <input onChange={(e)=> setEmail(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="email" id='email' placeholder='Emial Adress' required />
-                   
-                   
-                    <input onChange={(e)=> setPassword(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="password" id='password' placeholder='Password' required />
+                    <input onChange={(e) => setEmail(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="email" id='email' placeholder='Email Address' required />
+
+
+                    <input onChange={(e) => setPassword(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="password" id='password' placeholder='Password' required />
 
 
                     {

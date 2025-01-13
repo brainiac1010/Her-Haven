@@ -1,4 +1,4 @@
 export const getBaseUrl = () => {
 
-    return "http://localhost:5000/api/auth"
+    return "http://localhost:5000"
 } 
