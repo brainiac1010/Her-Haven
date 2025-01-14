@@ -1,26 +1,49 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRegisterUserMutation } from '../redux/features/auth/authApi';
 
 const Register = () => {
 
-    const [message, setMassage] = useState('');
-    const [userName, setUserName] = useState('')
+    const [message, setMessage] = useState('');
+
+    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+  
+
+    const [registerUser, { isLoading }] = useRegisterUserMutation();
+    const navigate = useNavigate()
+
     const handleRegister = async (e) => {
 
         e.preventDefault();
 
         const data = {
-            userName,
+            username,
             email,
             password
         }
-        console.log(data)
+        // console.log(data)
+
+
+        try {
+           await registerUser(data).unwrap();
+
+         
+            alert("Registration Successfull!")
+            navigate('/login')
+        } catch (error) {
+            setMessage("Registration  failed")
+        }
     }
 
-
+  
     
+
+
+
+
     return (
         <section className='h-screen flex items-center justify-center'>
 
@@ -28,9 +51,9 @@ const Register = () => {
                 <h2 className='text-2xl font-semibold pt-5'>Please Register</h2>
                 <form onSubmit={handleRegister} className='space-y-5 max-w-sm mx-auto pt-8' action="">
 
-                    <input onChange={(e) => setUserName(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="text" id='text' placeholder='Enter our name' name='user name' required />
+                    <input onChange={(e) => setUserName(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="text" id='text' placeholder='Enter our name' name='username' required />
 
-                    <input onChange={(e) => setEmail(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="email" id='email' placeholder='Emial Adress' name='email' required />
+                    <input onChange={(e) => setEmail(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="email" id='email' placeholder='Email Adress' name='email' required />
 
                     <input onChange={(e) => setPassword(e.target.value)} className=' w-full bg-gray-100 focus:outline-none px-5 py-3' type="password" id='password' placeholder='Password' name='password' required />
 
