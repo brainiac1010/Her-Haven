@@ -1,7 +1,11 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Profiler, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import CartModal from './pages/Shop/CartModal'
+
+import avatarImg from '../assets/avatar.png'
+import { useLogoutUserMutation } from '../redux/features/auth/authApi'
+import { logout } from '../redux/features/auth/authSlice'
 
 const Navbar = () => {
 
@@ -14,6 +18,48 @@ const Navbar = () => {
 
   }
 
+  // show user if logged in 
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const [logoutUser] = useLogoutUserMutation();
+  const navigate = useNavigate();
+  // console.log(user)
+
+  //dropdown menus
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const handleDropDownToggle = () => {
+    setIsDropDownOpen(!isDropDownOpen)
+  }
+
+  //admin dropdown manue
+  const adminDropDownMenus = [
+    { label: "Dashboard", path: "/dashboard/admin" },
+    { label: "Manage Items", path: "/dashboard/manage-products" },
+    { label: "All Orders", path: "/dashboard/manage-orders" },
+    { label: "Add New Post", path: "/dashboard/add-new-post" },
+  ]
+  //user dropdown
+  const userDropDownMenus = [
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Profile", path: "/dashboard/profile" },
+    { label: "Payments", path: "/dashboard/payments" },
+    { label: "Orders", path: "/dashboard/orders" },
+  ]
+
+
+  const dropdownMenus = user?.roal === 'admin' ? [...adminDropDownMenus] : [...userDropDownMenus]
+
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser().unwrap();
+      dispatch(logout())
+      navigate('/')
+    } catch (error) {
+      console.error("Failed to Log out", error)
+    }
+
+  }
   return (
     <header className="fixed-nav-bar w-nav">
       <nav className='max-w-screen-2xl mx-auto px-4 flex justify-between items-center'>
@@ -47,16 +93,46 @@ const Navbar = () => {
           </span>
 
           <span>
-            <Link to='login'>
-              <i className="ri-user-line"></i>
-            </Link>
+
+            {
+              user && user ? (<>
+                <img
+                  onClick={handleDropDownToggle}
+                  src={user?.profileImage || avatarImg} alt="" className='size-6 rounded-full cursor-pointer' />
+                {
+
+                  isDropDownOpen && (
+                    <div className='absolute right-0 mt-3 p-4 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50'>
+                      <ul className='font-medium space-y-4 p-2'>
+                        {dropdownMenus.map((menu, index) => (
+                          <li key={index}>
+                            <Link
+                              onClick={() => setIsDropDownOpen(false)}
+                              className='dropdown-items' to={menu.path}>{menu.label}</Link>
+                          </li>
+                        ))}
+
+                        <li>
+                          <Link onClick={handleLogout}
+                            className='dropdown-items'>Logout</Link>
+                        </li>
+                      </ul>
+
+                    </div>
+                  )
+                }
+              </>) : (<Link to='login'>
+                <i className="ri-user-line"></i>
+              </Link>)
+            }
+
           </span>
 
         </div>
       </nav>
 
       {
-        isCartOpen && <CartModal products ={products} isOpen ={isCartOpen} onClose={handleCartToggle}  ></CartModal>
+        isCartOpen && <CartModal products={products} isOpen={isCartOpen} onClose={handleCartToggle}  ></CartModal>
 
       }
     </header>
