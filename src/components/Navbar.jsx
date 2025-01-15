@@ -47,7 +47,7 @@ const Navbar = () => {
   ]
 
 
-  const dropdownMenus = user?.roal === 'admin' ? [...adminDropDownMenus] : [...userDropDownMenus]
+  const dropdownMenus = user?.role === 'admin' ? [...adminDropDownMenus] : [...userDropDownMenus]
 
 
   const handleLogout = async () => {
