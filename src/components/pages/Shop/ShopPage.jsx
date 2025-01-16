@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Categories from '../home/Categories'
+import  { useEffect, useState } from 'react'
+
 import productsData from '../../../data/product.json'
 import ProductCards from './ProductCards';
 import ShopFiltering from './ShopFiltering';
