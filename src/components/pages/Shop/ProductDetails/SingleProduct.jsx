@@ -1,14 +1,29 @@
 import { Link, useParams } from 'react-router-dom';
 import RatingStar from '../../../RatingStar';
-
-
-
+import { useDispatch } from "react-redux"
+import { useFetchProductByIdQuery } from '../../../../redux/features/products/products.Api';
+import { addToCart } from '../../../../redux/features/cart/cartSlice';
 
 const SingleProduct = () => {
     const { id } = useParams();
+    console.log("Product ID:", id);
 
-    // console.log("Product ID:", id);
+    const dispatch = useDispatch();
 
+    const { data, error, isLoading } = useFetchProductByIdQuery(id);
+    // console.log(data)
+    const SingleProduct = data?.product || {};
+    // console.log(SingleProduct)
+    const productReviews = data?.reviews || [];
+    // console.log(productReviews);
+
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product))
+    }
+
+
+    if (isLoading) return <p>Loading...</p>
+    if (error) return <p>Error Loading Product Details.</p>
     return (
         <>
             <section className='section__container bg-primary-light'>
@@ -28,7 +43,7 @@ const SingleProduct = () => {
 
                     <i className="ri-arrow-right-s-line"></i>
                     <span className='hover:text-primary'>
-                        Product Name
+                        {SingleProduct.name}
                     </span>
 
                 </div>
@@ -39,25 +54,41 @@ const SingleProduct = () => {
                 <div className='flex flex-col items-center md:flex-row gap-8'>
                     {/* product  img */}
                     <div className='md:w-1/2 w-full'>
-                        <img className='rounded-md w-full h-auto' src="https://images.unsplash.com/photo-1512201078372-9c6b2a0d528a?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                        <img className='rounded-md w-full h-auto' src={SingleProduct?.image} alt="" />
                     </div>
                     <div className='md:w-1/2 w-full'>
-                        <h3 className='text-2xl font-semibold mb-4'>Product Name</h3>
-                        <p className='text-xl text-primary mb-4'>$100 <s>$130</s> </p>
-                        <p className='text-gray-700 mb-4'>This is product description </p>
+                        <h3 className='text-2xl font-semibold mb-4'>{SingleProduct?.name}</h3>
+                        <p className="text-xl text-primary mb-4">
+                            ${SingleProduct?.price}
+                            {SingleProduct?.oldPrice && (
+                                <span className="ml-2">
+                                    <s>${SingleProduct?.oldPrice}</s>
+                                </span>
+                            )}
+                        </p>
+
+                        <p className='text-gray-700 mb-4'>{SingleProduct?.description}</p>
 
                         {/* aditional product info */}
 
                         <div>
-                            <p> <strong>Category:</strong> accessories</p>
-                            <p> <strong>Color:</strong> beige</p>
 
-                            <div className='flex gap-1 items-center'>
-                                <strong>Rating: </strong>
-                                <RatingStar rating={"4"}></RatingStar>
-                            </div>
+                            <div className='flex flex-col space-y-2'><p> <strong>Category:</strong> {SingleProduct.category}</p>
+                                <p> <strong>Color:</strong> {SingleProduct?.color}</p>
 
-                            <button className='mt-6 px-6 py-3 bg-primary text-white rounded-md'>Add to cart </button>
+                                <div className='flex gap-1 items-center'>
+                                    <strong>Rating: </strong>
+                                    <RatingStar rating={SingleProduct?.rating}></RatingStar>
+                                </div></div>
+
+
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAddToCart(SingleProduct)
+
+                                }}
+                                className='mt-6 px-6 py-3 bg-primary text-white rounded-md'>Add to cart </button>
 
                         </div>
 

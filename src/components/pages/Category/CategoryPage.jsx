@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import products from '../../../data/product.json'
 import ProductCards from '../Shop/ProductCards';
+import { useFetchAllProductsQuery } from '../../../redux/features/products/products.Api';
 
 const CategoryPage = () => {
 
     const { categoryName } = useParams();
+    const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({});
     // console.log(categoryName)
 
     const [filteredProducts, setfilteredProducts] = useState([]);
@@ -15,9 +16,10 @@ const CategoryPage = () => {
         setfilteredProducts(filtered)
     }, [categoryName])
 
-useEffect(()=>{
-    window.scrollTo(0,0)
-})
+
+    // useEffect(() => {
+    //     window.scrollTo(0, 0)
+    // })
     return (
         <>
             <section className='section__container bg-primary-light'>

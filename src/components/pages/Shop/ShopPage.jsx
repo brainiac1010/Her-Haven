@@ -85,7 +85,7 @@ const ShopPage = () => {
 
                     {/* right area */}
                     <div>
-                        <h3 className='text-xl font-medium mb-4'>Products Available: {products.length}</h3>
+                        <h3 className='text-xl font-medium mb-4'>Showing {startProduct} to {endProduct} of {totalProducts} products </h3>
                         <ProductCards products={products}></ProductCards>
 
                         {/* pagination control */}
