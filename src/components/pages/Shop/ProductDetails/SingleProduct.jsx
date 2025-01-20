@@ -3,6 +3,7 @@ import RatingStar from '../../../RatingStar';
 import { useDispatch } from "react-redux"
 import { useFetchProductByIdQuery } from '../../../../redux/features/products/products.Api';
 import { addToCart } from '../../../../redux/features/cart/cartSlice';
+import ReviewsCard from '../reviews comment/ReviewsCard';
 
 const SingleProduct = () => {
     const { id } = useParams();
@@ -100,8 +101,8 @@ const SingleProduct = () => {
             {/* display review  */}
 
             <section className='section__container mt-8'>
-                {/* TODO: WORK WITH REVIW WHEN WE HAVE API */}
-                reviews hear
+              
+             <ReviewsCard productReviews={productReviews}></ReviewsCard>
             </section>
 
         </>
