@@ -12,11 +12,11 @@ const SingleProduct = () => {
     const dispatch = useDispatch();
 
     const { data, error, isLoading } = useFetchProductByIdQuery(id);
-    // console.log(data)
+    console.log(data)
     const SingleProduct = data?.product || {};
     // console.log(SingleProduct)
     const productReviews = data?.reviews || [];
-    // console.log(productReviews);
+    console.log(productReviews);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))

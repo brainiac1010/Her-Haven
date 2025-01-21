@@ -20,7 +20,7 @@ const cartSlice = createSlice({
             if (!isExist) {
                 state.products.push({ ...action.payload, quantity: 1 })
             } else {
-                console.log("item is alrady added")
+                // console.log("item is alrady added")
             };
 
 

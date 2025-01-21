@@ -10,6 +10,7 @@ const PostAReview = ({ isModalOpen, handleClose }) => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
 
+    console.log(user);
     const { refetch } = useFetchProductByIdQuery(id, { skip: !id });
     const [postReview] = usePostReviewMutation();
 
@@ -22,7 +23,7 @@ const PostAReview = ({ isModalOpen, handleClose }) => {
         const newComment = {
             comment: comment,
             rating: rating,
-            userId: user?._id,
+            userId: user?.id,
             productId: id,
         };
         try {
@@ -72,3 +73,4 @@ const PostAReview = ({ isModalOpen, handleClose }) => {
 };
 
 export default PostAReview;
+ 
