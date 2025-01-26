@@ -4,7 +4,7 @@ import Home from "../components/pages/home/Home";
 import CategoryPage from "../components/pages/Category/CategoryPage";
 import Search from "../components/pages/search/Search";
 import ShopPage from "../components/pages/Shop/ShopPage";
-import SingelProduct from "../components/pages/Shop/ProductDetails/SingleProduct";
+import SingleProduct from "../components/pages/Shop/ProductDetails/SingleProduct";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
@@ -34,8 +34,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "/shop/:id",
-                element: <SingelProduct></SingelProduct>
+                element: <SingleProduct></SingleProduct>
             },
+            {
+                path:"/success",
+                element: <div>When payment success </div>
+            }
+          
 
         ]
     },

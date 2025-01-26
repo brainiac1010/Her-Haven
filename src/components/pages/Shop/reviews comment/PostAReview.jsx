@@ -10,7 +10,7 @@ const PostAReview = ({ isModalOpen, handleClose }) => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
 
-    console.log(user);
+    // console.log(user);
     const { refetch } = useFetchProductByIdQuery(id, { skip: !id });
     const [postReview] = usePostReviewMutation();
 
