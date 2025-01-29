@@ -7,6 +7,7 @@ import ShopPage from "../components/pages/Shop/ShopPage";
 import SingleProduct from "../components/pages/Shop/ProductDetails/SingleProduct";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import PaymentSuccess from "../components/PaymentSuccess";
 
 const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"/success",
-                element: <div>When payment success </div>
+                element: <PaymentSuccess></PaymentSuccess>
             }
           
 

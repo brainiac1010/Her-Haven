@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { act } from 'react'
 
 const initialState = {
     products: [],
@@ -23,9 +22,7 @@ const cartSlice = createSlice({
             if (!isExist) {
 
                 state.products.push({ ...action.payload, quantity: 1 })
-            } else {
-                isExist.quantity += 1;
-            };
+            } 
 
 
             state.selectedItems = setSelectedItems(state);
@@ -35,9 +32,9 @@ const cartSlice = createSlice({
         },
         updateQuantity: (state, action) => {
             state.products = state.products.map((product) => {
-                if (product._id === action.payload._id) {  // Ensure you're using the correct ID
+                if (product._id === action.payload._id) { 
                     return {
-                        ...product, // Create a new object instead of mutating the existing one
+                        ...product, 
                         quantity: action.payload.type === 'increment' 
                             ? product.quantity + 1 
                             : product.quantity > 1 
