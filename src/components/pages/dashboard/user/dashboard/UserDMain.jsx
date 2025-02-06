@@ -39,15 +39,19 @@ const UserDMain = () => {
             tooltip: {
                 callbacks: {
                     label: function (tooltipItem) {
-                        if (tooltipItem.label === 'Total Payments') {
-                            return `Total payments: $${tooltipItem.raw.toFixed(2)}`;
+                        const datasetLabel = tooltipItem.dataset.label || '';
+                        const value = tooltipItem.raw ?? 0;
+                        
+                        if (datasetLabel === 'Total Payments') {
+                            return `Total payments: $${value.toFixed(2)}`;
                         }
-                        return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                        return `${datasetLabel}: ${value}`;
                     }
                 }
             }
         }
     };
+    
 
     return (
         <div className='p-6'>
