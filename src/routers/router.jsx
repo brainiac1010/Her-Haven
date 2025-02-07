@@ -11,6 +11,7 @@ import PaymentSuccess from "../components/PaymentSuccess";
 import DashboardLayout from "../components/pages/dashboard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import UserDMain from "../components/pages/dashboard/user/dashboard/UserDMain";
+import UserOrder from "../components/pages/dashboard/user/UserOrder";
 
 const router = createBrowserRouter([
     {
@@ -65,8 +66,8 @@ const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>, //TODO...it will bea a privet route hear
         children: [
             //user routes
-            { path: "", element: <UserDMain></UserDMain>},
-            { path: "orders", element: <div>user Order</div> },
+            { path: "", element: <UserDMain></UserDMain> },
+            { path: "orders", element: <UserOrder></UserOrder> },
             { path: "payments", element: <div>user Payments</div> },
             { path: "profile", element: <div>user Profile</div> },
             { path: "reviews", element: <div>user Reviews</div> },

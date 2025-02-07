@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useSelector } from 'react-redux'
 import { Bar } from "react-chartjs-2"
 import { Chart as ChartJs, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js"
@@ -68,3 +68,5 @@ const UserDMain = () => {
 }
 
 export default UserDMain;
+
+
