@@ -10,19 +10,25 @@ const TimelineStep = ({ step, isCompleted, isCurrent, isLastStep, icon, descript
     return (
         <li className="relative mb-6 sm:mb-0 sm:pl-10">
             <div className="flex items-center">
-                <div className={`z-10 flex items-center justify-center w-6 h-6 ${iconBgColor} ${iconTextColor} rounded-full ring-0 ring-white shrink-0`}>
+                <div className={`z-10 flex items-center justify-center w-6 h-6
+                    ${order?.status === 'completed' ? 'bg-green-700 text-green-100' :
+                        order?.status === 'pending' ? 'bg-red-700 text-red-100' :
+                            order?.status === 'processing' ? 'bg-blue-100 text-blue-700' :
+                                'bg-indigo-900 text-indigo-100'} ${iconBgColor} ${iconTextColor} 
+                    rounded-full ring-0 ring-white shrink-0`}>
                     <i className={`ri-${icon.iconName} text-xl`}></i>
                 </div>
                 {!isLastStep && (
-
                     <div className={`hidden sm:flex w-full h-0.5 ${connectorColor}`}>
-
-                    </div>)}
+                    </div>
+                )}
             </div>
 
             <div className='mt-3 sm:pe-8'>
                 <h3 className={`font-semibold text-base ${labelTextColor}`}>{step.label}</h3>
-                <time className='block mb-2 text-sm font-normal leading-none text-gray-400'>{order.updatedAt ? new Date(order.updatedAt).toLocaleString() : 'Time'}</time>
+                <time className='block mb-2 text-sm font-normal leading-none text-gray-400'>
+                    {order.updatedAt ? new Date(order.updatedAt).toLocaleString() : 'Time'}
+                </time>
                 <p className={`text-base font-normal ${descriptionTextColor}`}>{description}</p>
             </div>
         </li>

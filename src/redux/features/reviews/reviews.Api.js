@@ -31,6 +31,17 @@ export const reviewApi = createApi({
             }),
             providesTags: (result) => result ? [{ type: "Reviews", id: result[0]?.email }] : []
         })
+    // getReviewsByUserId: builder.query({
+    //     query: (userId) => {
+    //         console.log("Fetching reviews for userId:", userId);
+    //         return {
+    //             url: `/${userId}`
+    //         };
+    //     },
+    //     providesTags: (result) => result ? [{ type: "Reviews", id: result[0]?.email }] : []
+    // })
+    
+
     })
 })
 

@@ -12,6 +12,9 @@ import DashboardLayout from "../components/pages/dashboard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import UserDMain from "../components/pages/dashboard/user/dashboard/UserDMain";
 import UserOrder from "../components/pages/dashboard/user/UserOrder";
+import OrderDetails from "../components/pages/dashboard/user/OrderDetails";
+import UserPayments from "../components/pages/dashboard/user/UserPayments";
+import UserReviews from "../components/pages/dashboard/user/UserReviews";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: "/success",
                 element: <PaymentSuccess></PaymentSuccess>
+            },
+            {
+                path: "/orders/:orderId",
+                element: <OrderDetails></OrderDetails>
             }
 
 
@@ -68,9 +75,9 @@ const router = createBrowserRouter([
             //user routes
             { path: "", element: <UserDMain></UserDMain> },
             { path: "orders", element: <UserOrder></UserOrder> },
-            { path: "payments", element: <div>user Payments</div> },
+            { path: "payments", element: <UserPayments></UserPayments> },
             { path: "profile", element: <div>user Profile</div> },
-            { path: "reviews", element: <div>user Reviews</div> },
+            { path: "reviews", element: <UserReviews></UserReviews> },
 
             //admin routes(only accessible for admin) TODO :ROLE FILED INCLUDE with privet route
             {

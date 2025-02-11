@@ -9,10 +9,10 @@ const UserOrder = () => {
     console.log(orderdata);
 
     const orders = orderdata?.orders;
-    console.log(orders);
+    // console.log(orders);
     if (isLoading) return <div className="flex justify-center items-center h-screen">
-        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
-    </div>;
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-red-600"></div>
+    </div>
     if (error) return <div>No orders found</div>;
     return (
         <section className="py-1 bg-blueGray-50">
@@ -100,6 +100,6 @@ const UserOrder = () => {
     );
 };
 
-export default UserOrder; 
+export default UserOrder;
 
 

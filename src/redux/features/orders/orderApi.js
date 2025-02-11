@@ -7,17 +7,25 @@ const orderApi = createApi({
         baseUrl: `${getBaseUrl()}/api/orders`,
         credentials: "include",
     }),
-    tagTypes: ["order"],
+    tagTypes: ["Order"],
     endpoints: (builder) => ({
         getOrdersByEmail: builder.query({
             query: (email) => ({
                 url: `/${email}`,
                 method: "GET",
             }),
-            providesTags: ["order"], // Added for caching
+            providesTags: ["Order"],
         }),
-    }),
+
+        getOrderById: builder.query({
+            query: (orderId) => ({
+                url: `/order/${orderId}`,
+                method: "GET",
+            }),
+            providesTags: ["Order"],
+        }),
+    }), 
 });
 
-export const { useGetOrdersByEmailQuery } = orderApi;
+export const { useGetOrdersByEmailQuery ,useGetOrderByIdQuery} = orderApi;
 export default orderApi;
