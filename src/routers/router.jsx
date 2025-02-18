@@ -16,6 +16,8 @@ import OrderDetails from "../components/pages/dashboard/user/OrderDetails";
 import UserPayments from "../components/pages/dashboard/user/UserPayments";
 import UserReviews from "../components/pages/dashboard/user/UserReviews";
 import UserProfile from "../components/pages/dashboard/user/UserProfile";
+import AdminDmain from "../components/pages/dashboard/admin/dashboardAdmin/AdminDmain";
+import AddProduct from "../components/pages/dashboard/admin/addProduct/AddProduct";
 
 const router = createBrowserRouter([
     {
@@ -83,11 +85,11 @@ const router = createBrowserRouter([
             //admin routes(only accessible for admin) TODO :ROLE FILED INCLUDE with privet route
             {
                 path: "admin",
-                element: <PrivateRoute role="admin"><div>Admin main</div></PrivateRoute>
+                element: <PrivateRoute role="admin"><AdminDmain></AdminDmain></PrivateRoute>
             },
             {
-                path: "add-new-post",
-                element: <PrivateRoute role="admin"><div>New Post</div></PrivateRoute>
+                path: "add-product",
+                element: <PrivateRoute role="admin"><AddProduct></AddProduct></PrivateRoute>
             },
             {
                 path: "manage-products",
