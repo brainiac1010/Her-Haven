@@ -13,7 +13,7 @@ const UploadImage = ({ name, setImage }) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
             fileReader.onload = () => {
-                console.log("Base64 Image:", fileReader.result); // Log base64 data
+               // console.log("Base64 Image:", fileReader.result); // Log base64 data
                 resolve(fileReader.result);
             };
             fileReader.onerror = (error) => reject(error);
@@ -23,7 +23,7 @@ const UploadImage = ({ name, setImage }) => {
     // Request to upload a file
     const uploadSingleImage = (base64) => {
         setLoading(true);
-        setError(""); // Clear previous error
+        setError(""); // 
 
         axios.post(`${getBaseUrl()}/uploadImage`, { image: base64 })
             .then((res) => {

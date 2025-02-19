@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import TextInput from './TextInput'
 import SelectInput from './SelectInput'
+import { useNavigate } from "react-router-dom";
 import UploadImage from './UploadImage'
+import { useAddProductMutation } from '../../../../../redux/features/products/products.Api'
 
 const categories = [
     { label: 'Select Category', value: '' },
@@ -10,6 +12,7 @@ const categories = [
     { label: 'Jeweller', value: 'jeweller' },
     { label: 'Cosmetics', value: 'cosmetics' },
     { label: 'Skin Care', value: 'skin-care' },
+    { label: 'Dress', value: 'dress' },
 ]
 
 const colors = [
@@ -32,7 +35,9 @@ const AddProduct = () => {
         price: '',
         description: '',
     })
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('');
+
+    const [AddProduct, { isLoading, error }] = useAddProductMutation()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -40,10 +45,32 @@ const AddProduct = () => {
             ...product,
             [name]: value,
         })
-    }
+    };
+    const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!product.name || !product.category || !product.price || !product.description || !product.color) {
+            alert("Please fill all the required fields");
+            return;
+
+        }
+        try {
+            await AddProduct({ ...product, image, author: user?.id }).unwrap();
+            alert('Product add successfully')
+            setProduct({
+                name: '',
+                category: '',
+                color: '',
+                price: '',
+                description: '',
+            })
+            setImage('');
+            navigate("/shop")
+        } catch (error) {
+            console.log("Failed to submit product", error)
+        }
+
     }
 
     return (
@@ -86,6 +113,22 @@ const AddProduct = () => {
                     setImage={setImage}
                     placeholder="Upload image"
                 />
+
+                <div>
+                    <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Description</label>
+
+                    <textarea name="description" id="description"
+                        className='add-product-InputCSS'
+                        value={product.description}
+                        placeholder='Product Description write here'
+                        onChange={handleChange}
+                    ></textarea>
+                </div>
+
+                <div>
+                    <button type='submit' className="add-product-btn">Add Product</button>
+
+                </div>
             </form>
         </div>
     )
