@@ -29,14 +29,16 @@ const ManageProduct = () => {
     const [deleteProduct] = useDeleteProductMutation()
     const handleDeleteProduct = async (id) => {
         try {
-
             const response = await deleteProduct(id).unwrap();
-            alert("Product Deleted Successfully!")
-            await refetch()
+            if (response?.message) {
+                alert("Product Deleted Successfully!");
+                await refetch();
+            }
         } catch (error) {
-            console.error("Error deleting product", error)
+            console.error("Error deleting product", error);
         }
-    }
+    };
+    
     return (
         <>
             {isLoading && (
@@ -71,7 +73,7 @@ const ManageProduct = () => {
                                 <tbody>
                                     {products.length > 0 ? (
                                         products.map((product, index) => (
-                                            <tr key={product._id} className="border-t">
+                                            <tr key={index} className="border-t">
                                                 <td className="px-6 py-4 text-xs">{(currentPage - 1) * productsPerPage + index + 1}</td>
                                                 <td className="px-6 py-4 text-xs">{product?.name}</td>
                                                 <td className="px-6 py-4 text-xs">{formateDate(product?.createdAt)}</td>

@@ -1,38 +1,26 @@
-import React, { useState } from 'react';
-import { useFetchAllProductsQuery } from '../../../../../redux/features/products/products.Api';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useGetAdminStatsQuery } from '../../../../../redux/features/stats/statsApi';
+import AdminStats from './AdminStats';
+import AdminStatsChart from '../AdminStatsChart';
 
-const ManageProduct = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(12);
-    const { data: { products = [], totalPages, totalProducts } = {}, isLoading, error, refetch } = useFetchAllProductsQuery({
-        category: '',
-        color: '',
-        minPrice: '',
-        maxPrice: '',
-        page: currentPage,
-        limit: productsPerPage,
-    });
-    // console.log(products)
+const AdminDmain = () => {
 
-    //pagination
-    const startProduct = (currentPage - 1) * productsPerPage + 1;
-    const endProduct = startProduct + products.length - 1;
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber > 0 && pageNumber <= totalPages) {
-            setCurrentPage(pageNumber);
-        }
-    };
+    const { user } = useSelector((state) => state.auth);
+    const { data: stats, error, isLoading } = useGetAdminStatsQuery();
+    if (isLoading) return <div>Loading...</div>
+    if (!stats) return <div>No stats found </div>
+    if (error) return <div>Failed to load stats!</div>
     return (
-        <>
-        {
-            isLoading && (
-                <div className="flex justify-center items-center h-screen">
-                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-red-600"></div>
-                </div>
-            )
-        }
-        </>
-    );
-};
+        <div className='p-6'>
+            <div>
+                <h1 className='text-2xl font-semibold mb-4'>Admin Dashboard</h1>
+                <p className='text-gray-500'>Hi <span className='font-bold'>{user?.username}</span>! welcome to the admin dashboard</p>
+                <AdminStats stats={stats}></AdminStats>
+                <AdminStatsChart stats={stats}></AdminStatsChart>
+            </div>
+        </div>
+    )
+}
 
-export default ManageProduct;
+export default AdminDmain

@@ -27,7 +27,8 @@ const colors = [
 ]
 
 const AddProduct = () => {
-    const { user } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth) || {};
+
     const [product, setProduct] = useState({
         name: '',
         category: '',
@@ -57,19 +58,17 @@ const AddProduct = () => {
         }
         try {
             await AddProduct({ ...product, image, author: user?.id }).unwrap();
-            alert('Product add successfully')
-            setProduct({
-                name: '',
-                category: '',
-                color: '',
-                price: '',
-                description: '',
-            })
-            setImage('');
-            navigate("/shop")
+            alert('Product added successfully!');
+            navigate("/shop");
         } catch (error) {
-            console.log("Failed to submit product", error)
+            console.error("Failed to submit product", error);
+
+            if (error?.status === 401) {
+                alert("Session expired! Please log in again.");
+                // Dispatch a logout action here
+            }
         }
+
 
     }
 
@@ -112,6 +111,7 @@ const AddProduct = () => {
                     id="image"
                     setImage={setImage}
                     placeholder="Upload image"
+                    value={e => setImage(e.target.value)}
                 />
 
                 <div>
