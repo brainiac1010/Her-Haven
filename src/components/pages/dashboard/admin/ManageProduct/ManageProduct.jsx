@@ -14,9 +14,8 @@ const ManageProduct = () => {
         page: currentPage,
         limit: productsPerPage,
     });
-    // console.log(products)
 
-    //pagination
+    // Pagination
     const startProduct = (currentPage - 1) * productsPerPage + 1;
     const endProduct = startProduct + products.length - 1;
     const handlePageChange = (pageNumber) => {
@@ -25,20 +24,28 @@ const ManageProduct = () => {
         }
     };
 
+    const [deleteProduct] = useDeleteProductMutation();
 
-    const [deleteProduct] = useDeleteProductMutation()
     const handleDeleteProduct = async (id) => {
         try {
             const response = await deleteProduct(id).unwrap();
             if (response?.message) {
+              
                 alert("Product Deleted Successfully!");
-                await refetch();
+    
+              
+                setTimeout(() => {
+                    window.location.reload();
+                }, 0); 
             }
         } catch (error) {
             console.error("Error deleting product", error);
         }
     };
     
+    
+    
+
     return (
         <>
             {isLoading && (

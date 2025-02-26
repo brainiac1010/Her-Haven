@@ -7,7 +7,7 @@ const productsApi = createApi({
         baseUrl: `${getBaseUrl()}/api/products`,
         credentials: 'include',
         prepareHeaders: (headers, { getState }) => {
-            const token = getState().auth?.user?.token || localStorage.getItem('token'); // Check Redux and Local Storage
+            const token = getState().auth?.user?.token || localStorage.getItem('token'); 
             if (token) {
                 headers.set('Authorization', `Bearer ${token}`);
             }

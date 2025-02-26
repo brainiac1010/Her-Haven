@@ -3,7 +3,7 @@ import { Pie, Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 
 const AdminStatsChart = ({ stats }) => {
-    // console.log(stats);
+    console.log(stats);
 
     const pieData = {
         labels: ['Total Orders', 'Total Products', 'Total Reviews', 'Total Users'],
@@ -13,8 +13,8 @@ const AdminStatsChart = ({ stats }) => {
                 data: [
                     stats?.totalOrders || 0,
                     stats?.totalProducts || 0,
-                    stats?.totalReviews || 0,
-                    stats?.totalUsers || 0,
+                    stats?.totalReviews|| 0,
+                    stats?.totalUser || 0,
                 ],
                 backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0'],
                 hoverBackgroundColor: ['#e55373', '#2d91db', '#e6b345', '#3aa5a5'],
