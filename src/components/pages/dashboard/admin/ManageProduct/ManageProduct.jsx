@@ -3,6 +3,7 @@ import { useDeleteProductMutation, useFetchAllProductsQuery } from '../../../../
 import { formateDate } from '../../../../../utils/formateDate';
 import { Link } from 'react-router-dom';
 
+
 const ManageProduct = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(12);
@@ -15,6 +16,8 @@ const ManageProduct = () => {
         limit: productsPerPage,
     });
 
+
+    console.log("it is working....",products)
     // Pagination
     const startProduct = (currentPage - 1) * productsPerPage + 1;
     const endProduct = startProduct + products.length - 1;

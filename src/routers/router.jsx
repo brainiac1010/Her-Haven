@@ -20,6 +20,7 @@ import AdminDmain from "../components/pages/dashboard/admin/dashboardAdmin/Admin
 import AddProduct from "../components/pages/dashboard/admin/addProduct/AddProduct";
 import ManageProduct from "../components/pages/dashboard/admin/ManageProduct/ManageProduct";
 import UpdateProduct from "../components/pages/dashboard/admin/ManageProduct/UpdateProduct";
+import ManageUser from "../components/pages/dashboard/admin/users/ManageUser";
 
 const router = createBrowserRouter([
     {
@@ -103,7 +104,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "users",
-                element: <PrivateRoute role="admin"><div>All Users</div></PrivateRoute>
+                element: <PrivateRoute role="admin"> <ManageUser></ManageUser></PrivateRoute>
             },
             {
                 path: "manage-orders",
