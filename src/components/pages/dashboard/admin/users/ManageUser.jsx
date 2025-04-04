@@ -75,8 +75,8 @@ const ManageUser = () => {
                                                 <td className="px-6 py-4 text-xs">{user?.role || 'User'}</td>
                                                 <td className="px-6 py-4 text-xs">
                                                     <button
-                                                    onClick={()=>handleEdite(user)}
-                                                    className='flex gap-1 items-center hover:text-red-500'>
+                                                        onClick={() => handleEdite(user)}
+                                                        className='flex gap-1 items-center hover:text-red-500'>
                                                         <i className='ri-edit-2-line'></i>
                                                         Edit
                                                     </button>
