@@ -9,35 +9,48 @@ const UpdateUserModal = ({ user, onClose, onRoleUpdate }) => {
     try {
       await updateUserRole({ userId: user?._id, role }).unwrap();
       alert("Role updated successfully!");
-      onRoleUpdate();  
-      onClose();       
+      onRoleUpdate();
+      onClose();
     } catch (error) {
       console.error("Failed to update user role", error);
     }
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h3>Update User Role</h3>
-        <div>
-          <label htmlFor="role">Select Role:</label>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80">
+      <div className='bg-white p-4  rounded shadow-lg w-1/3'>
+        <h2 className='text-xl mb-4'>User Role Edit</h2>
+        <div className='mb-4 space-y-4'>
+          <label className='block text-sm font-medium text-gray-700'>Email</label>
+          <input type="email"
+            value={user?.email}
+            readOnly
+            className='mt-1 bg-gray-100 block w-full shadow-sm sm:border-gray-300 rounded-md py-2.5 px-5 focus:outline-none'
+          />
+        </div>
+        <div className='mb-4 space-y-4'>
+          <label className='block text-sm font-medium text-gray-700'>Role</label>
           <select
-            id="role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
+            className='block w-full shadow-sm sm:text-sm bg-gray-100 border-gray-300 rounded-md py-2.5 px-5 focus:outline-none'
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>
-            <option value="moderator">Moderator</option>
-            {/* Add more roles as needed */}
           </select>
         </div>
-        <div className="modal-actions">
-          <button onClick={handleUpdateRole} className="btn btn-primary">Update Role</button>
-          <button onClick={onClose} className="btn btn-secondary">Close</button>
+ 
+        <div className='flex justify-end pt-5'>
+          <button 
+          onClick={onClose}
+          className='bg-primary text-white px-4  py-2  rounded mr-2'>Cancel</button>
+          <button
+          onClick={handleUpdateRole}
+          className='bg-indigo-600 text-white px-4  py-2  rounded '>Save</button>
         </div>
+
       </div>
+
     </div>
   );
 }

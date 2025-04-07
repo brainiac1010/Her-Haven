@@ -21,18 +21,16 @@ const ManageUser = () => {
         }
     }
 
-
     const handleEdite = (user) => {
         setSelectedUser(user)
         setIsModalOpen(true)
-
     }
 
     const handleCloseModal = () => {
         setIsModalOpen(false)
         setSelectedUser(null)
-
     }
+
     return (
         <>
             {isLoading && (
@@ -58,7 +56,6 @@ const ManageUser = () => {
                                 <thead>
                                     <tr className="bg-blueGray-50">
                                         <th className="px-6 py-3 text-xs uppercase font-semibold text-left border border-blueGray-100">No.</th>
-
                                         <th className="px-6 py-3 text-xs uppercase font-semibold text-left border border-blueGray-100">Email</th>
                                         <th className="px-6 py-3 text-xs uppercase font-semibold text-left border border-blueGray-100">Role</th>
                                         <th className="px-6 py-3 text-xs uppercase font-semibold text-left border border-blueGray-100">Edit</th>
@@ -70,9 +67,10 @@ const ManageUser = () => {
                                         users.map((user, index) => (
                                             <tr key={user._id} className="border-t">
                                                 <td className="px-6 py-4 text-xs">{index + 1}</td>
-
                                                 <td className="px-6 py-4 text-xs">{user?.email || 'N/A'}</td>
-                                                <td className="px-6 py-4 text-xs">{user?.role || 'User'}</td>
+                                                <td className={`px-6 py-4 text-xs font-medium rounded ${user?.role === 'admin' ? 'bg-green-500 text-center text-white font-semibold' : 'bg-indigo-500 text-white text-center font-semibold'}`}>
+                                                    {user?.role || 'User'}
+                                                </td>
                                                 <td className="px-6 py-4 text-xs">
                                                     <button
                                                         onClick={() => handleEdite(user)}
