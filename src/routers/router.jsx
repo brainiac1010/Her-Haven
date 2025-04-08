@@ -24,6 +24,7 @@ import ManageUser from "../components/pages/dashboard/admin/users/ManageUser";
 import ManageOrder from "../components/pages/dashboard/admin/manageOrders/ManageOrder";
 import AboutUs from "../components/pages/AboutUs";
 import ContactUs from "../components/pages/ContactUs";
+import OrderCancelled from "../components/pages/OrderCancle.jsx";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <ContactUs></ContactUs>
+            },
+            {
+                path: "/cancel",
+                element: <OrderCancelled></OrderCancelled>
             }
 
 
